@@ -9,10 +9,10 @@ abstract contract Triggerable is ITriggerable {
 
     error UnauthorizedTrigger();
 
-    function executeEmergencyTrigger() external {
+    function executeTrigger() external {
         if (msg.sender != _DEREG_TRIGGER) revert UnauthorizedTrigger();
-        _onEmergencyTrigger();
+        _onTrigger();
     }
 
-    function _onEmergencyTrigger() internal virtual;
+    function _onTrigger() internal virtual;
 }

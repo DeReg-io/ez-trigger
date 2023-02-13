@@ -3,5 +3,5 @@ pragma solidity 0.8.15;
 
 /// @author philogy <https://github.com/philogy>
 interface ITriggerable {
-    function executeEmergencyTrigger() external;
+    function executeTrigger() external;
 }

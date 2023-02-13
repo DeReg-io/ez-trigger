@@ -7,7 +7,7 @@ import {Triggerable} from "src/Triggerable.sol";
 contract SimpleTriggerable is Triggerable {
     bool public wasTriggered;
 
-    function _onEmergencyTrigger() internal override {
+    function _onTrigger() internal override {
         wasTriggered = true;
     }
 }

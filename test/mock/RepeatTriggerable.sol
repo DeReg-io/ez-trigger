@@ -9,7 +9,7 @@ contract RepeatTriggerable is Triggerable {
 
     event Triggered(uint256 count);
 
-    function _onEmergencyTrigger() internal override {
+    function _onTrigger() internal override {
         unchecked {
             emit Triggered(triggeredCount++);
         }

@@ -23,6 +23,6 @@ contract TriggerManager is Owned {
 
     function executeTriggerOf(address _target) external {
         if (msg.sender != trigger && msg.sender != owner) revert NotAuthorizedTrigger();
-        ITriggerable(_target).executeEmergencyTrigger();
+        ITriggerable(_target).executeTrigger();
     }
 }

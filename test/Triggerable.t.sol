@@ -58,7 +58,7 @@ contract TriggerableTest is BaseTriggerableTest {
     function testNotOwnerCannotDirectTrigger() public {
         vm.prank(attacker);
         vm.expectRevert(Triggerable.UnauthorizedTrigger.selector);
-        triggerable.executeEmergencyTrigger();
+        triggerable.executeTrigger();
     }
 
     function testNonOwnerCannotSetTrigger() public {
