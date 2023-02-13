@@ -3,6 +3,7 @@ pragma solidity 0.8.15;
 
 import {Test} from "forge-std/Test.sol";
 import {TriggerManager} from "../src/TriggerManager.sol";
+import {Triggerable} from "../src/Triggerable.sol";
 import {SimpleTriggerable} from "./mock/SimpleTriggerable.sol";
 
 /// @author philogy <https://github.com/philogy>
@@ -61,6 +62,12 @@ contract TriggerableTest is Test {
         vm.prank(attacker);
         vm.expectRevert(TriggerManager.NotAuthorizedTrigger.selector);
         TRIGGER_MANAGER.executeTriggerOf(address(triggerable));
+    }
+
+    function testNotOwnerCannotDirectTrigger() public {
+        vm.prank(attacker);
+        vm.expectRevert(Triggerable.UnauthorizedTrigger.selector);
+        triggerable.executeEmergencyTrigger();
     }
 
     function testNonOwnerCannotSetTrigger() public {
