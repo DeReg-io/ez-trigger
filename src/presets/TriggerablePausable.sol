@@ -5,7 +5,7 @@ import {Pausable} from "@oz/security/Pausable.sol";
 import {Triggerable} from "../Triggerable.sol";
 
 /// @author philogy <https://github.com/philogy>
-abstract contract TriggerablePause is Pausable, Triggerable {
+abstract contract TriggerablePausable is Pausable, Triggerable {
     function _onTrigger() internal virtual override {
         _pause();
     }

@@ -5,7 +5,7 @@ import {BaseTriggerableTest} from "./base/BaseTriggerableTest.sol";
 import {Pausing} from "./mock/Pausing.sol";
 
 /// @author philogy <https://github.com/philogy>
-contract TriggerablePauseTest is BaseTriggerableTest {
+contract TriggerablePausableTest is BaseTriggerableTest {
     Pausing pausing;
 
     address owner = makeAddr("PAUSING_OWNER");
