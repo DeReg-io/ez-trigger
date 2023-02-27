@@ -7,7 +7,13 @@ import {ITriggerable} from "./interfaces/ITriggerable.sol";
 abstract contract Triggerable is ITriggerable {
     address internal constant _DEREG_TRIGGER = 0x7FFf218ae66A6d63540d87b09F5537f6588122df;
 
+    bytes32 public immutable override DEREG_INIT_ID;
+
     error UnauthorizedTrigger();
+
+    constructor(bytes32 _deregInitID) {
+        DEREG_INIT_ID = _deregInitID;
+    }
 
     function executeTrigger() external {
         if (msg.sender != _DEREG_TRIGGER) revert UnauthorizedTrigger();

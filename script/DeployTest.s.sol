@@ -24,7 +24,7 @@ contract DeployTestScript is Script, Test {
         TriggerManager trigManager = new TriggerManager(vm.addr(startKey2), vm.addr(startKey1));
         emit log_named_address("address(trigManager)", address(trigManager));
 
-        SimpleTriggerable triggerable = new SimpleTriggerable();
+        SimpleTriggerable triggerable = new SimpleTriggerable(vm.envBytes32("INIT_ID"));
         emit log_named_address("address(triggerable)", address(triggerable));
 
         vm.stopBroadcast();

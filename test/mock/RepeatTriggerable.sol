@@ -9,6 +9,8 @@ contract RepeatTriggerable is Triggerable {
 
     event Triggered(uint256 count);
 
+    constructor(bytes32 _deregInitID) Triggerable(_deregInitID) {}
+
     function _onTrigger() internal override {
         unchecked {
             emit Triggered(triggeredCount++);

@@ -13,6 +13,8 @@ abstract contract BaseTriggerableTest is Test {
 
     TriggerManager internal constant TRIGGER_MANAGER = TriggerManager(0x7FFf218ae66A6d63540d87b09F5537f6588122df);
 
+    bytes32 internal constant DEFAULT_INIT_ID = keccak256("DEFAULT_INIT_ID");
+
     constructor() {
         vm.etch(address(TRIGGER_MANAGER), type(TriggerManager).runtimeCode);
         vm.store(address(TRIGGER_MANAGER), bytes32(0x0), bytes32(uint256(uint160(triggerOwner))));

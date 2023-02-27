@@ -14,7 +14,7 @@ contract TriggerableTest is BaseTriggerableTest {
     event TriggerChanged(address indexed prevTrigger, address indexed newTrigger);
 
     function setUp() public {
-        triggerable = new SimpleTriggerable();
+        triggerable = new SimpleTriggerable(DEFAULT_INIT_ID);
 
         assertFalse(triggerable.wasTriggered());
     }
@@ -35,6 +35,10 @@ contract TriggerableTest is BaseTriggerableTest {
         vm.prank(TRIGGER_MANAGER.owner());
         TRIGGER_MANAGER.setTrigger(_newTrigger);
         assertEq(TRIGGER_MANAGER.trigger(), _newTrigger);
+    }
+
+    function testInitID() public {
+        assertEq(triggerable.DEREG_INIT_ID(), DEFAULT_INIT_ID);
     }
 
     function testTriggerCanTrigger() public {
