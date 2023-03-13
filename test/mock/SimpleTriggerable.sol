@@ -7,7 +7,7 @@ import {Triggerable} from "src/Triggerable.sol";
 contract SimpleTriggerable is Triggerable {
     bool public wasTriggered;
 
-    constructor(bytes32 _deregInitID) Triggerable(_deregInitID) {}
+    constructor(bytes memory _deregInitUUID) Triggerable(_deregInitUUID) {}
 
     function _onTrigger() internal override {
         wasTriggered = true;

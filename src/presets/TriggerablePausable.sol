@@ -6,7 +6,7 @@ import {Triggerable} from "../Triggerable.sol";
 
 /// @author philogy <https://github.com/philogy>
 abstract contract TriggerablePausable is Pausable, Triggerable {
-    constructor(bytes32 _deregInitID) Triggerable(_deregInitID) {}
+    constructor(bytes memory _deregInitUUID) Triggerable(_deregInitUUID) {}
 
     function _onTrigger() internal virtual override {
         _pause();

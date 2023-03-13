@@ -3,7 +3,7 @@ pragma solidity 0.8.15;
 
 import {Script} from "forge-std/Script.sol";
 import {Test} from "forge-std/Test.sol";
-import {TriggerManager} from "../src/TriggerManager.sol";
+import {TriggerManager} from "../src/infra/TriggerManager.sol";
 import {SimpleTriggerable} from "../test/mock/SimpleTriggerable.sol";
 
 /// @author philogy <https://github.com/philogy>
@@ -24,7 +24,7 @@ contract DeployTestScript is Script, Test {
         TriggerManager trigManager = new TriggerManager(vm.addr(startKey2), vm.addr(startKey1));
         emit log_named_address("address(trigManager)", address(trigManager));
 
-        SimpleTriggerable triggerable = new SimpleTriggerable(vm.envBytes32("INIT_ID"));
+        SimpleTriggerable triggerable = new SimpleTriggerable(vm.envBytes("INIT_UUID"));
         emit log_named_address("address(triggerable)", address(triggerable));
 
         vm.stopBroadcast();

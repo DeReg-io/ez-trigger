@@ -3,7 +3,7 @@ pragma solidity 0.8.15;
 
 import {Script} from "forge-std/Script.sol";
 import {Test} from "forge-std/Test.sol";
-import {TriggerManager} from "../src/TriggerManager.sol";
+import {TriggerManager} from "../src/infra/TriggerManager.sol";
 import {SimpleTriggerable} from "../test/mock/SimpleTriggerable.sol";
 
 /// @author philogy <https://github.com/philogy>

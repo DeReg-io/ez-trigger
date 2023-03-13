@@ -12,7 +12,7 @@ contract TriggerablePausableTest is BaseTriggerableTest {
 
     function setUp() public {
         vm.prank(owner);
-        pausing = new Pausing(DEFAULT_INIT_ID);
+        pausing = new Pausing(DEFAULT_UUID);
         assertEq(pausing.owner(), owner);
         assertFalse(pausing.paused());
     }

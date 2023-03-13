@@ -7,7 +7,7 @@ import {TriggerablePausable} from "../../src/presets/TriggerablePausable.sol";
 
 /// @author philogy <https://github.com/philogy>
 contract Pausing is Pausable, Ownable, TriggerablePausable {
-    constructor(bytes32 _deregInitID) TriggerablePausable(_deregInitID) {}
+    constructor(bytes memory _deregInitUUID) TriggerablePausable(_deregInitUUID) {}
 
     function directPause() external onlyOwner {
         _pause();

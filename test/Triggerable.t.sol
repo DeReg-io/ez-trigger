@@ -2,7 +2,7 @@
 pragma solidity 0.8.15;
 
 import {BaseTriggerableTest} from "./base/BaseTriggerableTest.sol";
-import {TriggerManager} from "../src/TriggerManager.sol";
+import {TriggerManager} from "../src/infra/TriggerManager.sol";
 import {Triggerable} from "../src/Triggerable.sol";
 import {SimpleTriggerable} from "./mock/SimpleTriggerable.sol";
 
@@ -14,7 +14,7 @@ contract TriggerableTest is BaseTriggerableTest {
     event TriggerChanged(address indexed prevTrigger, address indexed newTrigger);
 
     function setUp() public {
-        triggerable = new SimpleTriggerable(DEFAULT_INIT_ID);
+        triggerable = new SimpleTriggerable(DEFAULT_UUID);
 
         assertFalse(triggerable.wasTriggered());
     }
@@ -38,7 +38,7 @@ contract TriggerableTest is BaseTriggerableTest {
     }
 
     function testInitID() public {
-        assertEq(triggerable.DEREG_INIT_ID(), DEFAULT_INIT_ID);
+        assertEq(triggerable.DEREG_OWNER_UUID(), DEFAULT_UUID);
     }
 
     function testTriggerCanTrigger() public {

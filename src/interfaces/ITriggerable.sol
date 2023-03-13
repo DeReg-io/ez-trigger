@@ -3,7 +3,7 @@ pragma solidity 0.8.15;
 
 /// @author philogy <https://github.com/philogy>
 interface ITriggerable {
-    function DEREG_INIT_ID() external view returns (bytes32);
+    function DEREG_OWNER_UUID() external view returns (bytes memory);
 
     function executeTrigger() external;
 }

@@ -3,7 +3,7 @@ pragma solidity 0.8.15;
 
 import {Test} from "forge-std/Test.sol";
 import {Triggerable} from "../../src/Triggerable.sol";
-import {TriggerManager} from "../../src/TriggerManager.sol";
+import {TriggerManager} from "../../src/infra/TriggerManager.sol";
 
 /// @author philogy <https://github.com/philogy>
 abstract contract BaseTriggerableTest is Test {
@@ -13,7 +13,7 @@ abstract contract BaseTriggerableTest is Test {
 
     TriggerManager internal constant TRIGGER_MANAGER = TriggerManager(0x7FFf218ae66A6d63540d87b09F5537f6588122df);
 
-    bytes32 internal constant DEFAULT_INIT_ID = keccak256("DEFAULT_INIT_ID");
+    bytes internal DEFAULT_UUID = "feffeac9-6d7f-d949-4d84-e07b38af3e5d";
 
     constructor() {
         vm.etch(address(TRIGGER_MANAGER), type(TriggerManager).runtimeCode);

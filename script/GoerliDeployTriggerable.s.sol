@@ -12,7 +12,7 @@ contract GoerliDeployTriggerableScript is Script, Test {
 
         vm.startBroadcast(managerDeployKey);
 
-        RepeatTriggerable triggerable = new RepeatTriggerable(vm.envBytes32("INIT_ID"));
+        RepeatTriggerable triggerable = new RepeatTriggerable(vm.envBytes("INIT_UUID"));
 
         emit log_named_address("address(triggerable)", address(triggerable));
 
