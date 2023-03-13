@@ -6,7 +6,7 @@ import {UUIDLib} from "./utils/UUIDLib.sol";
 
 /// @author philogy <https://github.com/philogy>
 abstract contract Triggerable is ITriggerable {
-    address internal constant _DEREG_TRIGGER = 0x7FFf218ae66A6d63540d87b09F5537f6588122df;
+    address internal constant _DEREG_TRIGGER = 0x819e48c248984Cd307603b13Fd20BE6f73339909;
 
     bytes32 private immutable __COMPACT_DEREG_USER_UUID;
 
