@@ -2,7 +2,7 @@
 pragma solidity 0.8.15;
 
 import {Owned} from "solmate/auth/Owned.sol";
-import {ITriggerable} from "./interfaces/ITriggerable.sol";
+import {ITriggerable} from "../interfaces/ITriggerable.sol";
 
 /// @author philogy <https://github.com/philogy>
 contract TriggerManager is Owned {
