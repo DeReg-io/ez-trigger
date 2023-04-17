@@ -4,6 +4,7 @@ pragma solidity 0.8.15;
 import {Test} from "forge-std/Test.sol";
 import {Triggerable} from "../../src/Triggerable.sol";
 import {TriggerManager} from "../../src/infra/TriggerManager.sol";
+import {DEREG_TRIGGER_MANAGER_V0_2} from "../../src/interfaces/ITriggerableConstants.sol";
 
 /// @author philogy <https://github.com/philogy>
 abstract contract BaseTriggerableTest is Test {
@@ -11,7 +12,7 @@ abstract contract BaseTriggerableTest is Test {
     address trigger = makeAddr("FIRST_TRIGGER");
     address attacker = makeAddr("ATTACKER");
 
-    TriggerManager internal constant TRIGGER_MANAGER = TriggerManager(0x7FFf218ae66A6d63540d87b09F5537f6588122df);
+    TriggerManager internal constant TRIGGER_MANAGER = TriggerManager(DEREG_TRIGGER_MANAGER_V0_2);
 
     bytes internal DEFAULT_UUID = "feffeac9-6d7f-d949-4d84-e07b38af3e5d";
 

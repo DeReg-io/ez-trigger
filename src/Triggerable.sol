@@ -3,11 +3,10 @@ pragma solidity ^0.8.0;
 
 import {ITriggerable} from "./interfaces/ITriggerable.sol";
 import {UUIDLib} from "./utils/UUIDLib.sol";
+import {DEREG_TRIGGER_MANAGER_V0_2} from "./interfaces/ITriggerableConstants.sol";
 
 /// @author philogy <https://github.com/philogy>
 abstract contract Triggerable is ITriggerable {
-    address internal constant _DEREG_TRIGGER = 0x819e48c248984Cd307603b13Fd20BE6f73339909;
-
     bytes32 private immutable __COMPACT_DEREG_USER_UUID;
 
     error UnauthorizedTrigger();
@@ -21,7 +20,7 @@ abstract contract Triggerable is ITriggerable {
     }
 
     function executeTrigger() external {
-        if (msg.sender != _DEREG_TRIGGER) revert UnauthorizedTrigger();
+        if (msg.sender != DEREG_TRIGGER_MANAGER_V0_2) revert UnauthorizedTrigger();
         _onTrigger();
     }
 
