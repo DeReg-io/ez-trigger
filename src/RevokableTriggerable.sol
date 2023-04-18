@@ -13,7 +13,9 @@ abstract contract RevokableTriggerable is ITriggerable {
     error UnauthorizedTrigger();
 
     /**
-     * @dev Sets the contract's `DEREG_OWNER_UUID` and initial authorized trigger address.
+     * @dev Sets the contract's "DeReg UUID" so that the ownership of an account can be associated
+     * to user accounts. Also sets the initial address authorized to execute the trigger to
+     * DeReg's default trigger manager.
      */
     constructor(bytes memory uuid) {
         __COMPACT_DEREG_USER_UUID = UUIDLib.toCompact(uuid);
@@ -22,8 +24,7 @@ abstract contract RevokableTriggerable is ITriggerable {
     }
 
     /**
-     * @dev Unpack stored UUID and return. 
-     * @return The contract's set UUID in the expected format including dashes.
+     * @inheritdoc ITriggerable
      */
     function DEREG_OWNER_UUID() external view returns (bytes memory) {
         return UUIDLib.fromCompact(__COMPACT_DEREG_USER_UUID);
