@@ -42,19 +42,23 @@ library UUIDLib {
                 // Find dash that was actually incorrect
                 if iszero(eq(byte(UUID_DASH1, word1), 0x2d)) {
                     mstore(0x21, 0x2d)
-                    mstore(0x00, UUID_DASH1)
+                    mstore(0x41, 0)
+                    mstore(0x20, UUID_DASH1)
                 }
                 if iszero(eq(byte(UUID_DASH2, word1), 0x2d)) {
                     mstore(0x21, 0x2d)
-                    mstore(0x00, UUID_DASH2)
+                    mstore(0x41, 0)
+                    mstore(0x20, UUID_DASH2)
                 }
                 if iszero(eq(byte(UUID_DASH3, word1), 0x2d)) {
                     mstore(0x21, 0x2d)
-                    mstore(0x00, UUID_DASH3)
+                    mstore(0x41, 0)
+                    mstore(0x20, UUID_DASH3)
                 }
                 if iszero(eq(byte(UUID_DASH4, word1), 0x2d)) {
                     mstore(0x21, 0x2d)
-                    mstore(0x00, UUID_DASH4)
+                    mstore(0x41, 0)
+                    mstore(0x20, UUID_DASH4)
                 }
 
                 revert(0x1c, 0x44)
