@@ -4,7 +4,9 @@ pragma solidity ^0.8.0;
 /// @author philogy <https://github.com/philogy>
 library UUIDLib {
     error InvalidUUIDLength();
-    error InvalidUUIDChar(uint256 i, bytes1 char);
+    error InvalidUUIDCharOther(uint256 i, bytes1 char);
+    error InvalidUUIDCharUpper(uint256 i, bytes1 char);
+    error MissingUUIDDash(uint256 i, bytes1 char);
 
     uint256 internal constant UUID_LENGTH = 36;
     uint256 internal constant UUID_DASH1 = 8;
@@ -18,20 +20,19 @@ library UUIDLib {
     uint256 internal constant UUID_MASK4 = 0x00000000000000000000000000000000000000ffffffff000000000000000000;
     uint256 internal constant UUID_MASK5 = 0x0000000000000000000000000000000000000000ffffffffffffffffffffffff;
 
-    // bytes32 internal constant HEX_CHAR_MAP = 0x5858585858583938373635343332313058585858585858585866656463626158;
+    uint256 internal constant HEX_CHAR_MAP = 0x5858585858585858583031323334353637383961626364656658414243444546;
+    uint256 internal constant CHAR_LOOKUP_MOD = 39;
 
     bytes16 internal constant HEX_CHARS = "0123456789abcdef";
 
-    function toCompact(bytes memory _uuid) internal pure returns (bytes32 compactUUID) {
-        if (_uuid.length != UUID_LENGTH) revert InvalidUUIDLength();
+    function toCompact(bytes memory uuid) internal pure returns (bytes32 compactUUID) {
+        if (uuid.length != UUID_LENGTH) revert InvalidUUIDLength();
 
         for (uint256 i; i < UUID_LENGTH;) {
             if (i == UUID_DASH1 || i == UUID_DASH2 || i == UUID_DASH3 || i == UUID_DASH4) {
-                if (_uuid[i] != "-") revert InvalidUUIDChar(i, _uuid[i]);
+                if (uuid[i] != "-") revert MissingUUIDDash(i, uuid[i]);
             } else {
-                if (!isHexChar(_uuid[i])) {
-                    revert InvalidUUIDChar(i, _uuid[i]);
-                }
+                checkChar(uuid[i], i);
             }
 
             // forgefmt: disable-next-item
@@ -39,8 +40,8 @@ library UUIDLib {
         }
 
         assembly {
-            let word1 := mload(add(_uuid, 0x20))
-            let word2 := mload(add(_uuid, 0x24))
+            let word1 := mload(add(uuid, 0x20))
+            let word2 := mload(add(uuid, 0x24))
 
             compactUUID :=
                 or(
@@ -78,13 +79,20 @@ library UUIDLib {
         }
     }
 
-    function isHexChar(bytes1 _char) internal pure returns (bool) {
-        for (uint256 i; i < 16;) {
-            if (_char == HEX_CHARS[i]) return true;
-
-            // forgefmt: disable-next-item
-            unchecked { ++i; }
+    function checkChar(bytes1 char, uint256 i) internal pure {
+        assembly {
+            let uchar := shr(248, char)
+            let lookedUpChar := byte(mod(uchar, CHAR_LOOKUP_MOD), HEX_CHAR_MAP)
+            let isHex := eq(lookedUpChar, uchar)
+            let isUpper := eq(and(uchar, 0x70), 0x40)
+            if iszero(eq(shl(isUpper, isHex), 1)) {
+                switch isHex
+                case 0 { mstore(0x00, 0x9a841ebf) }
+                default { mstore(0x00, 0xd3772f31) }
+                mstore(0x20, i)
+                mstore(0x40, char)
+                revert(0x1c, 0x44)
+            }
         }
-        return false;
     }
 }
