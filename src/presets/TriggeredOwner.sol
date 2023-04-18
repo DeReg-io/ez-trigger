@@ -9,7 +9,7 @@ import {Triggerable} from "../Triggerable.sol";
 abstract contract TriggeredOwner is Owned, Multicallable, Triggerable {
     constructor(address initialOwner, bytes memory deregInitUUID) Owned(initialOwner) Triggerable(deregInitUUID) {}
 
-    function relayCallTo(address to, bytes calldata cd, uint256 value, bool requireSuccess)
+    function forwardCall(address to, bytes calldata cd, uint256 value, bool requireSuccess)
         external
         onlyOwner
         returns (bytes memory retData)
