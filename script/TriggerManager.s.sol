@@ -11,7 +11,7 @@ interface ICreate2Factory {
 }
 
 /// @author philogy <https://github.com/philogy>
-contract GoerliDeployScript is Script, Test {
+contract TriggerManagerDeploy is Script, Test {
     ICreate2Factory internal SAFE_CREATE2_FACTORY = ICreate2Factory(0x0000000000FFe8B47B3e2130213B802212439497);
 
     function run() external {
