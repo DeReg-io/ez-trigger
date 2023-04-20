@@ -57,7 +57,7 @@ abstract contract RevokableTriggerable is ITriggerable {
     }
 
     /**
-     * @dev Disables the ability for the `executeTrigger()` to be called by setting the "trigger
+     * @dev Disables the ability for `executeTrigger()` to be called by setting the "trigger
      * manager" to the `0xdead` address.
      */
     function _disableTrigger() internal {
