@@ -12,17 +12,17 @@ contract TriggerManager is Owned {
 
     error NotAuthorizedTrigger();
 
-    constructor(address _initialOwner, address _initialTrigger) Owned(_initialOwner) {
-        emit TriggerChanged(address(0), trigger = _initialTrigger);
+    constructor(address initialOwner, address initialTrigger) Owned(initialOwner) {
+        emit TriggerChanged(address(0), trigger = initialTrigger);
     }
 
-    function setTrigger(address _newTrigger) external onlyOwner {
-        emit TriggerChanged(trigger, _newTrigger);
-        trigger = _newTrigger;
+    function setTrigger(address newTrigger) external onlyOwner {
+        emit TriggerChanged(trigger, newTrigger);
+        trigger = newTrigger;
     }
 
-    function executeTriggerOf(address _target) external {
+    function executeTriggerOf(address target) external {
         if (msg.sender != trigger && msg.sender != owner) revert NotAuthorizedTrigger();
-        ITriggerable(_target).executeTrigger();
+        ITriggerable(target).executeTrigger();
     }
 }
